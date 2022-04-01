@@ -16,7 +16,7 @@ export type SaveProduct = {
   description: string;
   price: number;
   barCode: number;
-  type;
+  type: ProductTypes;
 };
 
 export type EditProduct = SaveProduct & { id: string };

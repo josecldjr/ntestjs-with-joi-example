@@ -10,7 +10,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { validatePayload } from 'src/generic/validation';
-import { ValidateParams } from 'src/generic/validation-decorator';
+import { ValidateBody, ValidateParams } from 'src/generic/validation-decorator';
 import { editProductValidationSchema } from './validation/edit-product.validation';
 import { TestGetValidation } from './validation/test-get';
 
@@ -22,12 +22,14 @@ export class ProductController {
   }
 
   @Put('whitout')
-  async editUserWithDecorator(@Body() body): Promise<void> {
+  async editUserWithDecorator(
+    @ValidateBody(editProductValidationSchema) body,
+  ): Promise<void> {
     return body;
   }
 
   @Get('whitout')
-  async testGet(@Query() params: any) {
+  async testGet(@ValidateParams(TestGetValidation) params: any) {
     return params;
   }
 }
