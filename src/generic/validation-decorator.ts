@@ -6,6 +6,7 @@ export const ValidateBody: (validation: IValidateSchema) => any =
     const request = ctx.switchToHttp().getRequest();
     return validatePayload(schema, request.body);
   });
+
 export const ValidateParams: (validation: IValidateSchema) => any =
   createParamDecorator((schema: any, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest();

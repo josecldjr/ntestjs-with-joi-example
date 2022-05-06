@@ -16,20 +16,35 @@ import { TestGetValidation } from './validation/test-get';
 
 @Controller('product')
 export class ProductController {
+  // no scopo
   @Put()
   async editUser(@Body() body): Promise<void> {
     return validatePayload(editProductValidationSchema, body);
   }
 
-  @Put('whitout')
+  // no decorator
+  @Put('decorator')
   async editUserWithDecorator(
     @ValidateBody(editProductValidationSchema) body,
   ): Promise<void> {
     return body;
   }
 
-  @Get('whitout')
+  // sem validação
+  @Put('without')
+  async editUserWithoutValidator(@Body() body): Promise<void> {
+    return body;
+  }
+
+  // get com validation e cast
+  @Get()
   async testGet(@ValidateParams(TestGetValidation) params: any) {
+    return params;
+  }
+
+  // sem validation
+  @Get('whitout')
+  async testGetWithoutValidation(@Query() params: any) {
     return params;
   }
 }
